@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Space Projects</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0a0a0a;
+      color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+      line-height: 1.8;
+    }
+    header {
+      text-align: center;
+      padding: 30px 10px;
+      background: linear-gradient(45deg, #0d47a1, #1976d2);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+      color: #fff;
+    }
+    section {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #1a1a1a;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.6);
+    }
+    h2 {
+      color: #90caf9;
+      margin-top: 0;
+    }
+    img, video {
+      width: 100%;
+      border-radius: 8px;
+      margin: 15px 0;
+    }
+    a {
+      color: #4fc3f7;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    li {
+      margin: 10px 0;
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #111;
+      margin-top: 40px;
+      color: #aaa;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🌌 Space Projects</h1>
+  </header>
+
+  <section>
+    <h2>NEOSSat - Near Earth Object Surveillance Satellite</h2>
+    <p>
+      This video shows that planets need trackers too.
+    </p>
+    <video controls>
+      <source src="neossat2.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </section>
+
+<section>
+    <h2>Frequency</h2>
+    <p>
+      This video shows how sound frequencies make particles dance.
+    </p>
+    <video controls>
+      <source src="neossat1.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </section>
+
+<section>
+    <h2>Frequency</h2>
+    <p>
+      This video shows how sound frequencies make particles dance.
+    </p>
+    <video controls>
+      <source src="neossat4.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </section>
+
+  <section>
+    <h2>Radio frequency</h2>
+    <p>
+      This video shows how Radio frequency
+    </p>
+    <video controls>
+      <source src="neossat3.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </section>
+
+  <section>
+    <h2>physics</h2>
+    <p>
+      See, spiders can also fly with the help of physics!
+    </p>
+    <video controls>
+      <source src="jwst2.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </section>
+
+<section>
+    <h2>NEOSSat - Near Earth Object Surveillance Satellite</h2>
+    <p>
+      The dataset includes astronomical images from the NEOSSat satellite.  
+      NEOSSat is the world's first space telescope dedicated to detecting and tracking asteroids, comets, satellites, and space debris.
+    </p>
+   <li>
+      <a class="btn" href="https://donnees-data.asc-csa.gc.ca/en/dataset/9ae3e718-8b6d-40b7-8aa4-858f00e84b30" download>
+      link 
+      </a>
+    </li>
+</section>  
+
+<section>
+    <h2>More information on NEOSSat</h2>
+    <p>
+      This website provides more information on the NEOSSat satellite.  
+      It covers topics such as asteroid and space debris tracking, exoplanet detection, and Canada’s contributions to space situational awareness.
+    </p>
+     <li>
+      <a class="btn" href="https://www.asc-csa.gc.ca/eng/satellites/neossat/" download>
+         link 
+      </a>
+    </li>
+  </section>
+
+<section>
+    <h2>James Webb Space Telescope (JWST)</h2>
+    <p>
+      This page provides detailed information about the James Webb Space Telescope  
+      and highlights Canada’s contributions to the mission.
+    </p>
+     <li>
+      <a class="btn" href="https://www.asc-csa.gc.ca/eng/satellites/jwst/about.asp" download>
+         link 
+      </a>
+    </li>
+</section>
+
+  <section>
+      <h2>deta code 💻</h2>
+      <a class="file-btn" href="cumulative_2025.09.22_09.06.37.csv" download>⬇️donload</a>
+  </section>
+
+  <section>
+     <h2>code nasa ☄</h2>
+     <ul>
+        <pre><code class="language-python">
+%matplotlib inline
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+import xgboost as xgb
+import matplotlib.pyplot as plt
+
+df = pd.read_csv("cumulative_2025.09.22_09.06.37.csv")
+
+y = df['koi_disposition']
+le = LabelEncoder()
+y = le.fit_transform(y)
+
+X = df.drop(columns=['kepoi_name', 'kepler_name', 'rowid', 'kepid', 'koi_disposition', 'koi_pdisposition'])
+X = pd.get_dummies(X)
+
+x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+xgb_model = xgb.XGBClassifier(
+    n_estimators=300,
+    max_depth=10,
+    learning_rate=0.05,
+    subsample=0.8,
+    colsample_bytree=0.8,
+    random_state=42,
+    eval_metric='mlogloss'
+)
+xgb_model.fit(x_train, y_train)
+
+y_pred = xgb_model.predict(x_test)
+print("✅ Model trained. Test accuracy:", accuracy_score(y_test, y_pred))
+
+
+def predict_planet_status(planet_name):
+
+    row = df[df['kepoi_name'].str.lower() == planet_name.lower()]
+    
+    if row.empty:
+        print(f"ℹ️ Planet {planet_name} not found in dataset.")
+        print("👉 Please provide the required information:")
+
+       
+        koi_period = float(input("Orbital period (days): "))
+        koi_prad = float(input("Planetary radius (Earth radii): "))
+        koi_teq = float(input("Equilibrium temperature (K): "))
+        koi_smass = float(input("Stellar mass (solar masses): "))
+        koi_srad = float(input("Stellar radius (solar radii): "))
+
+       
+        X_row = pd.DataFrame([{
+            "koi_period": koi_period,
+            "koi_prad": koi_prad,
+            "koi_teq": koi_teq,
+            "koi_smass": koi_smass,
+            "koi_srad": koi_srad
+        }])
+
+        for col in X.columns:
+            if col not in X_row.columns:
+                X_row[col] = 0
+        X_row = X_row[X.columns]
+
+    else:
+    
+        X_row = row.drop(columns=['kepoi_name','kepler_name','rowid','kepid','koi_disposition','koi_pdisposition'])
+        X_row = pd.get_dummies(X_row)
+        missing_cols = set(X.columns) - set(X_row.columns)
+        for col in missing_cols:
+            X_row[col] = 0
+        X_row = X_row[X.columns]
+    
+   
+    pred_label = xgb_model.predict(X_row)[0]
+    pred_class = le.inverse_transform([pred_label])[0]
+
+    if pred_class == "CONFIRMED":
+        print(f"✅ Planet {planet_name} is an EXOPLANET (Confirmed).")
+    else:
+        print(f"❌ Planet {planet_name} is NOT a confirmed exoplanet ({pred_class}).")
+
+    if not row.empty:
+        features = X_row.iloc[0]
+        features = features[features.apply(lambda x: isinstance(x, (int, float)))]
+        features.plot(kind='bar', figsize=(12,5))
+        plt.title(f"Features of Planet {planet_name} (raw data)")
+        plt.ylabel("Value")
+        plt.show()
+
+
+print("🌌 Exoplanet Checker")
+print("Type 'exit' to quit.")
+
+while True:
+    planet_name = input("\nWhich planet do you have in mind? ")
+    if planet_name.lower() == "exit":
+        print("👋 Goodbye!")
+        break
+    predict_planet_status(planet_name)
+
+</code></pre>
+
+     </ul>
+  </section>
+
+  <section>
+    <h2>🌐 Useful Links</h2>
+    <ul>
+      <li><a href="https://www.youtube.com/@Helmaheydar" target="_blank">YouTube Channel</a></li>
+      <li><a href="https://github.com/09129562330/NASA-Challenge-code/tree/main" target="_blank">GitHub Repository</a></li>
+      <li><a href="https://www.canva.com/design/DAG0u4sJjzI/ZWn-itFvLx-ZzzgMXCEYYA/edit" target="_blank">Canva Design</a></li>
+    </ul>
+  </section>
+  <footer>
+    ©️ 2025 Space Project
+  </footer>
+
+</body>
+</html>
